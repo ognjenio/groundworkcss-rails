@@ -11,7 +11,7 @@ module Groundworkcss
       def generate_layout
         app = ::Rails.application
         @app_name = app.class.to_s.split("::").first
-        ext = app.config.generators.options[:rails][:template_engine] || :erb
+        ext = :erb
         template "layout.html.#{ext}", "app/views/layouts/#{layout_name}.html.#{ext}"
         copy_file "_sidebar.html.#{ext}", "app/views/layouts/_sidebar.html.#{ext}"
         copy_file "_header.html.#{ext}", "app/views/layouts/_header.html.#{ext}"        
