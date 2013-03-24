@@ -15,9 +15,17 @@
   var limitPaginationItems;
 
   $(document).ready(function() {
-    var delay;
+    var delay, dropdown, menu, navitem;
     delay = '';
-    $('nav > ul > li.menu').on({
+    navitem = $('nav > ul > li');
+    navitem.find('>a').on({
+      focus: function(e) {
+        $('nav > ul > li').removeClass('on');
+        return $('nav > ul > li > ul').hide();
+      }
+    });
+    menu = $('nav > ul > li.menu');
+    menu.on({
       mouseenter: function(e) {
         if ($(window).width() > 768) {
           clearTimeout(delay);
@@ -57,6 +65,39 @@
           e.preventDefault();
           return false;
         }
+      }
+    });
+    menu.find('>a').on({
+      focus: function() {
+        return $(this).parent('li.menu').trigger('mouseenter');
+      }
+    });
+    menu.find('li:last-child > a').on({
+      blur: function() {
+        return $(this).closest('li.menu').trigger('mouseleave');
+      }
+    });
+    dropdown = $('.dropdown');
+    dropdown.on({
+      focus: function() {
+        return $(this).addClass('on');
+      }
+    });
+    dropdown.find('li:last-child a').on({
+      blur: function() {
+        return dropdown.filter('.on').removeClass('on');
+      }
+    });
+    $('body').on('click', function(e) {
+      if ($(e.target).hasClass('dropdown')) {
+        $(e.target).toggleClass('on');
+      } else {
+        if (dropdown.filter('.on').length) {
+          dropdown.filter('.on').removeClass('on');
+        }
+      }
+      if (navitem.filter('.menu.on').length) {
+        return navitem.filter('.menu.on').removeClass('on');
       }
     });
     limitPaginationItems();
@@ -136,13 +177,15 @@
         }
       }
     });
-    $('.tabs > ul > li > a').not('.disabled').on('click', function(e) {
+    $('.tabs > ul > li > a[href^=#]').on('click', function(e) {
       var tabs;
-      tabs = $(this).parents('.tabs');
-      tabs.find('> ul li a').removeClass('active');
-      $(this).addClass('active');
-      tabs.children('div').removeClass('active');
-      tabs.children($(this).attr('href')).addClass('active');
+      if (!$(this).hasClass('disabled')) {
+        tabs = $(this).parents('.tabs');
+        tabs.find('> ul li a').removeClass('active');
+        $(this).addClass('active');
+        tabs.children('div').removeClass('active');
+        tabs.children($(this).attr('href')).addClass('active');
+      }
       e.preventDefault();
       return false;
     });
@@ -179,10 +222,6 @@
     });
     $('.tooltip[title]').tooltip();
     return $('div.modal').modal();
-  });
-
-  $(window).load(function() {
-    return $('.slider').orbit();
   });
 
   $(window).resize(function() {
