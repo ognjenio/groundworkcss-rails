@@ -1,8 +1,20 @@
+.desktop-only { display:block; }
+.hide-on-desktop {}
+
+.ipad-only { display:none; }
+.hide-on-ipad {}
+
+.small-tablet-only { display:none; }
+.hide-on-small-tablet {}
+
+.mobile-only { display:none; }
+.hide-on-mobile {}
+
 ///////////////////////
 //   large desktops  //
 ///////////////////////
 // @include large-desktop {
-
+//  
 // }
 
 
@@ -11,9 +23,9 @@
 ///////////////////////
 //      desktops     //
 ///////////////////////
-// @include desktop {
-
-// }
+@include desktop {
+  // do not remove -- required for desktop helpers
+}
 
 
 
@@ -21,9 +33,9 @@
 ///////////////////////
 //       ipads       //
 ///////////////////////
-// @include ipad {
-
-// }
+@include ipad {
+  // do not remove -- required for ipad helpers
+}
 
 
 
@@ -32,99 +44,128 @@
 //   small tablets   //
 ///////////////////////
 @include small-tablet {
+  // do not remove -- required for small-tablet helpers and adaptations
   @include grid-responsive();
-  nav:not(.pagination), nav.inline {
+  .nav {
     width:100%;
     ul, ul.row {
       li {
         display:block;
         width:100% !important;
-        &.menu {
-          > a {
-            &:after {
-              display:none !important;
-            }
-            &:before {
-              content:'\f0c9';
-              display: inline-block;
-              width: 1.1em;
-              margin-left:0.25em;
-              font-family: FontAwesome;
-              font-weight: normal;
-              font-style: normal;
-              font-size:1.1em;
-              text-decoration: inherit;
-              -webkit-font-smoothing: antialiased;
-              line-height: normal;
-              vertical-align: baseline;
-              background-image: none;
-              background-position: 0% 0%;
-              background-repeat: repeat;
-              margin-top: 0;
-            }
+        &:first-child {
+          > a, > , > a:visited {
+            @include rounded($radius $radius 0 0);
           }
+        }
+        &:last-child {
+          > a, > , > a:visited {
+            @include rounded(0 0 $radius $radius);
+          }
+        }
+        &:only-child {
+          > a, > , > a:visited {
+            @include rounded($radius);
+          }
+        }
+        a, a:visited {
+          border:none;
+          border-top:1px solid $button-active;
         }
         ul {
           position:static;
-          @include filter-shadow(rgba(0,0,0,0), 0, 0, 0);
           li {
-            &:first-child {
-              a, a:visited {
-                @include rounded(0 !important);
-              }
+            a, a:visited {
+              @include rounded(0);
             }
-            &:last-child {
+            &:first-child,
+            &:last-child,
+            &:only-child {
               a, a:visited {
-                @include rounded(0 !important);
+                @include rounded(0);
               }
             }
           }
         }
-      }
-      &:last-child {
-        li {
-          &:last-child {
-            ul {
-              li {
-                &:last-child {
-                  a, a:visited {
-                    @include rounded(0 0 $radius $radius !important);
-                  }
+        &:first-child {
+          a, a:visited {
+            @include rounded($radius $radius 0 0);
+          }
+        }
+        &:last-child {
+          a, a:visited {
+            @include rounded(0 0 $radius $radius);
+          }
+          ul {
+            li {
+              &:last-child {
+                a, a:visited {
+                  @include rounded(0 0 $radius $radius);
                 }
               }
             }
           }
         }
+        &:only-child {
+          a, a:visited {
+            @include rounded($radius);
+          }
+        }
       }
     }
   }
-  nav:not(.pagination), nav.inline {
-    ul, ul.row {
-      li {
-        &:first-child {
-          > a, > , > a:visited {
-            @include rounded($radius $radius 0 0 !important);
-          }
-        }
-        &:last-child {
-          > a, > , > a:visited {
-            @include rounded(0 0 $radius $radius !important);
-          }
-          &.on {
-            > a, > , > a:visited {
-              border-bottom-right-radius:0 !important;
-              border-bottom-left-radius:0 !important;
+  // hamburger menu
+  .nav {
+    &.menu {
+      display:block;
+      float:none;
+      &:before {
+        content:attr(data-label);
+        float:left;
+        color:$button-text;
+        line-height:2.2;
+      }
+      background-color:$button-color;
+      padding:$gutter;
+      padding-bottom:0;
+      @include rounded($radius);
+      .menu-toggle {
+        display:inline-block !important;
+        float:right;
+        margin-bottom:$gutter;
+      }
+      > ul, > ul.row {
+        display:block !important;
+        overflow:hidden;
+        max-height:0;
+        width:auto;
+        margin:0 (-$gutter);
+        clear:both;
+        @include transition(all 0.2s ease);
+        li {
+          a, a:visited {
+            border:none;
+            border-top:1px solid $button-active;
+            &:first-child, &:last-child {
+              @include rounded(0);
             }
+            &:hover, &:focus {
+              border:none;
+              border-top:1px solid $button-active;
+            }
+          }
+          &:last-child {
+            a, a:visited {
+              @include rounded(0 0 $radius $radius);
+            }
+          }
+          ul {
+            position:static;
           }
         }
       }
-      li {
-        ul {
-          li {
-            a, a:visited {
-              @include rounded(0 !important);
-            }
-          }
+      &.on {
+        > ul {
+          max-height:1000px;
         }
       }
     }
@@ -148,15 +189,6 @@
       }
     }
   }
-  .no-padding-small-tablet {
-    padding:0;
-  }
-  .no-margin-small-tablet {
-    margin:0;
-  }
-  .zero-small-tablet {
-    @extend %zero;
-  }
 }
 
 
@@ -166,6 +198,7 @@
 //     handhelds     //
 ///////////////////////
 @include mobile {
+  // do not remove -- required for mobile helpers and adaptations
   @include grid-responsive(false);
   .tabs:not(.mobile) {
     > ul {
@@ -181,15 +214,6 @@
         }
       }
     }
-  }
-  .no-padding-mobile {
-    padding:0;
-  }
-  .no-margin-mobile {
-    margin:0;
-  }
-  .zero-mobile {
-    @extend %zero;
   }
 }
 

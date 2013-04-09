@@ -1,9 +1,17 @@
 ///////////////////////
 //      settings     //
 ///////////////////////
-$max-width:           1200px; // max container width (i.e. - 960px)
-$gutter:              10px;   // gutter spacing
-$classes:             true;   // enable CSS classes
+$max-width:           1200px;     // max container width (i.e. - 960px)
+$gutter:              10px;       // gutter spacing
+$classes:             true;       // enable CSS classes
+
+
+// file paths
+$css_path:            'css/';     // path to CSS output (relative from HTML document root)
+$root_path:           '../';      // path to HTML document root (relative from $css_path)
+$images_path:         'images/';  // path to images (relative from $root_path)
+$fonts_path:          'font/';    // path to fonts (relative from $root_path)
+$boxsizing_path:      '/js/libs/boxsizing.htc';  // path to box sizing polyfill (change to absolute path from HTML document root)
 
 
 // base styles
@@ -17,9 +25,11 @@ $selection-color:     $font-color;
 $selection-text:      #ffffff;
 $border-color:        #dddddd;
 $button-color:        #1DABB8;
+$button-border-color: darken($button-color,10%);
 $button-active:       #198D98;
 $button-text:         #ffffff;
 $button-active-text:  #ffffff;
+$disabled-color:      gray;
 $error-color:         #A40400;
 $warning-color:       #FF971E;
 $success-color:       #5FB40E;

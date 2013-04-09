@@ -1,6 +1,7 @@
+@import "compass";
 /* =============================================
  *       GroundworkCSS by Gary Hepting
- *          Last Updated:2013-1-28
+ *          Last Updated:2013-3-30
  * ===========================================*/
 
 // variables & mixins
@@ -31,6 +32,10 @@
 @import "cycle";
 // @import "popovers";
 @import "modals";
+@import "tiles";
+
+// CSS animations (required by helpers)
+@import "animations";
 
 // helper classes
 @import "helpers";
