@@ -29,6 +29,7 @@ a, a:visited {
   color:$link-color;
   @include transition(color 0.25s);
   &:hover, &:focus {
+    color:$link-active;
     text-decoration:underline;
   }
 }
@@ -202,6 +203,7 @@ pre {
 	border-left:#{$border} solid gray;
 	counter-reset:linenumber;
 	code {
+    display:block;
 		background:inherit;
 		margin:0;
 		padding:0;

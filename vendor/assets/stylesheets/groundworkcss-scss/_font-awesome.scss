@@ -21,6 +21,7 @@
  *  Work: Lead Product Designer @ http://kyruus.com
  */
 
+$fontAwesomePath:   "#{$root_path}#{$fonts_path}" !default;
 $borderColor:       #eee;
 $iconMuted:         #eee;
 @mixin border-radius($radius) { -webkit-border-radius: $radius; -moz-border-radius: $radius; border-radius: $radius; }

@@ -3,17 +3,17 @@
 		<% if content_for? :nav %>
 			<h3>
 				<i class="icon-reorder"></i>
-				Navigation	
-			</h3>        	
-			<nav>
+				Navigation
+			</h3>
+			<nav class="nav">
 				<ul>
 					<%= yield :nav%>
 				</ul>
 			</nav>
 		<%end%>
-		
+
 		<br/>
-		
+
 		<% if content_for? :sidebar%>
 			<%= yield :sidebar%>
 		<%end%>
