@@ -1,38 +1,44 @@
-# GroundworkCSS by Sidereel for Rails
-http://groundwork.sidereel.com/
+*IMPORTANT! This gem has been deprecated. Use [the official GroundworkCSS Rails Gem](https://github.com/groundworkcss/groundworkcss-rails)*
+----
 
-groundworkcss-rails gem integrates the Groundwork Framework into Rails.
+
+# GroundworkCSS for Rails
+
+The groundworkcss-rails gem integrates the GroundworkCSS framework into Rails.
 
 ## Installing Gem
 
 In Gemfile:
 
-    gem 'groundworkcss-rails'
+```ruby
+gem 'groundworkcss-rails'
+```
 
 or edge:
 
-    gem 'groundworkcss-rails', :git => 'http://github.com/oregac/groundworkcss-rails.git'
+```ruby
+gem 'groundworkcss-rails', :git => 'http://github.com/oregac/groundworkcss-rails.git'
+```
 
 Then bundle:
 
-    bundle install
-    
+```bash
+bundle install
+```
+
 ## Generators
-	
+
 To install the resources:
-		
-		rails g groundworkcss:install
-		
+
+```bash
+rails g groundworkcss:install
+```
+
 To generate a layout skeleton:
 
-		rails g groundworkcss:layout
+```bash
+rails g groundworkcss:layout
+```
 
-## Todo:
- - Pagination overrides
- - Modal helper
- - Breadcrumb helper
- - Orbit helper?
- - Tests
-		
 ## License
 MIT
